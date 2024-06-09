@@ -1,5 +1,10 @@
 package structs
 
+import (
+	"strconv"
+	"strings"
+)
+
 type LinkedListNode struct {
 	Data int
 	Next *LinkedListNode
@@ -19,6 +24,21 @@ func InitLinkedListNode(data int) *LinkedListNode {
 	}
 }
 
+func (ll *LinkedListNode) String() string {
+	if ll == nil {
+		return ""
+	}
+
+	curr := ll
+	valueList := []string{}
+	for curr != nil {
+		valueList = append(valueList, strconv.Itoa(curr.Data))
+		curr = curr.Next
+	}
+
+	return strings.Join(valueList, " -> ")
+}
+
 type LinkedList struct {
 	Head *LinkedListNode
 }
@@ -35,4 +55,19 @@ func CreateLinkedList(lst []int) *LinkedList {
 	return &LinkedList{
 		Head: head,
 	}
+}
+
+func (ll *LinkedList) String() string {
+	if ll.Head == nil {
+		return ""
+	}
+
+	curr := ll.Head
+	valueList := []string{}
+	for curr != nil {
+		valueList = append(valueList, strconv.Itoa(curr.Data))
+		curr = curr.Next
+	}
+
+	return strings.Join(valueList, " -> ")
 }
